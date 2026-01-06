@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+
 
 class ProductListActivity : AppCompatActivity() {
 
@@ -43,36 +46,45 @@ class ProductListActivity : AppCompatActivity() {
     }
 
     private fun loadProducts(uuid: String, major: String, minor: String, mode: String) {
-        // Get aisle info
-        val aisleInfo = MockDataSource.getAisleInfo(uuid, major, minor)
 
-        if (aisleInfo == null) {
-            tvError.text = "Beacon not found in system"
-            tvError.visibility = View.VISIBLE
-            rvProducts.visibility = View.GONE
-            return
-        }
+        lifecycleScope.launch {
+            try {
+                // Fetch products from Flask API (which reads from MySQL)
+                val products = DataSource.getProducts(uuid, major, minor, mode)
 
-        // Get products
-        val products = MockDataSource.getProducts(uuid, major, minor, mode)
+                if (products.isEmpty()) {
+                    tvError.text = if (mode == "promo") {
+                        "No promotions available in this aisle"
+                    } else {
+                        "No products found in this aisle"
+                    }
+                    tvError.visibility = View.VISIBLE
+                    rvProducts.visibility = View.GONE
+                    tvAisleName.visibility = View.GONE
+                    return@launch
+                }
 
-        if (products.isEmpty()) {
-            tvError.text = if (mode == "promo") {
-                "No promotions available in this aisle"
-            } else {
-                "No products found in this aisle"
+                // Derive aisle info from API response (aisle_name is included)
+                val aisleName = products.firstOrNull()?.aisle_name ?: "Unknown aisle"
+                val floor = major.toIntOrNull() ?: -1
+                val aisleId = minor.toIntOrNull() ?: -1
+
+                tvAisleName.text = "Aisle: $aisleName (Floor $floor, Aisle $aisleId)"
+                tvAisleName.visibility = View.VISIBLE
+
+                rvProducts.visibility = View.VISIBLE
+                rvProducts.adapter = ProductAdapter(products)
+                tvError.visibility = View.GONE
+
+            } catch (e: Exception) {
+                tvError.text = "Failed to load products: ${e.message}"
+                tvError.visibility = View.VISIBLE
+                rvProducts.visibility = View.GONE
+                tvAisleName.visibility = View.GONE
             }
-            tvError.visibility = View.VISIBLE
-            rvProducts.visibility = View.GONE
-        } else {
-            tvAisleName.text = "Aisle: ${aisleInfo.aisleName} (Floor ${aisleInfo.floor})"
-            tvAisleName.visibility = View.VISIBLE
-
-            rvProducts.visibility = View.VISIBLE
-            rvProducts.adapter = ProductAdapter(products)
-            tvError.visibility = View.GONE
         }
     }
+
 }
 
 class ProductAdapter(private val products: List<Product>) :

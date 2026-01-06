@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 DB_CONFIGURE = {
     "host" : "127.0.0.1",
-    "user" : "root",
-    "password" : "root123",
+    "user" : "iot",
+    "password" : "Iot@12345678!",
     "database" : "iot_store",
     "port" : 3306
 }
@@ -81,5 +81,4 @@ def products():
 def get_connection():
     return mysql.connector.connect(**DB_CONFIGURE)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+app.run(host="0.0.0.0", port=5001, debug=True)
