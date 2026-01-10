@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 DB_CONFIGURE = {
     "host" : "127.0.0.1",
-    "user" : "iot",
-    "password" : "Iot@12345678!",
+    "user" : "root",
+    "password" : "localpassword",
     "database" : "iot_store",
     "port" : 3306
 }

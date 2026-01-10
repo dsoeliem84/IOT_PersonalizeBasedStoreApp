@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="24dp"/>
 
     <TextView
         android:id="@+id/tvBeaconCount"
@@ -36,10 +36,10 @@
         android:text=""
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#000000"
         android:gravity="center"
         android:padding="12dp"
-        android:background="@android:color/holo_green_light"
+        android:textColor="@color/logo_yellow"
+        android:background="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/tvBeaconCount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +81,8 @@
     <Button
         android:id="@+id/btnViewProducts"
         android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
         android:layout_height="wrap_content"
         android:text="View All Products"
         app:layout_constraintBottom_toTopOf="@id/btnViewPromos"
@@ -93,7 +95,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="View Promotions"
-        android:backgroundTint="#FF6200EE"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

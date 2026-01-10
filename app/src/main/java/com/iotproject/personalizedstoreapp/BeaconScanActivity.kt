@@ -30,6 +30,8 @@ class BeaconScanActivity : AppCompatActivity(), BeaconConsumer {
 
     private var detectedBeacons = mutableMapOf<String, Beacon>()
     private var closestBeacon: Beacon? = null
+    private val log_tag = "BeaconScanner"
+    private var lastCycleBeaconIds = setOf<String>() // Stores IDs from the previous scan
 
     private val PERMISSION_REQUEST_CODE = 1
 
@@ -143,6 +145,29 @@ class BeaconScanActivity : AppCompatActivity(), BeaconConsumer {
     }
 
     private fun updateBeaconInfo(beacons: Collection<Beacon>) {
+
+        // --- START LOGGING LOGIC ---
+        val currentCycleBeaconIds = beacons.map { "${it.id1}-${it.id2}-${it.id3}" }.toSet()
+
+        // Find NEW beacons (in current scan but NOT in last scan)
+        currentCycleBeaconIds.forEach { id ->
+            if (!lastCycleBeaconIds.contains(id)) {
+                android.util.Log.d(log_tag, "New Beacon Detected: $id")
+            }
+        }
+
+        // Find MISSED beacons (in last scan but NOT in current scan)
+        lastCycleBeaconIds.forEach { id ->
+            if (!currentCycleBeaconIds.contains(id)) {
+                android.util.Log.e(log_tag, "Beacon is Out of Range :  $id")
+            }
+        }
+
+        // Save current IDs for the next cycle comparison
+        lastCycleBeaconIds = currentCycleBeaconIds
+        // --
+
+
         if (beacons.isEmpty()) {
             tvBeaconInfo.text = "Waiting for beacons..."
             tvBeaconCount.text = "Found 0 beacon(s)"

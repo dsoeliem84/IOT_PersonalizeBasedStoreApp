@@ -7,7 +7,8 @@ import retrofit2.http.Query
 
 object DataSource {
 
-    private const val BASE_URL = "http://192.168.0.191:5001/"
+    //Update this with the Flask API url
+    private const val BASE_URL = "http://192.168.0.184:5001"
 
     private val api: StoreApi by lazy {
         Retrofit.Builder()

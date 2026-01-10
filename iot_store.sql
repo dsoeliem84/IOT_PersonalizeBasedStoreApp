@@ -78,7 +78,21 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'Milk','Fresh dairy milk, rich in calcium and perfect for everyday use.',NULL,1,1,1001),(2,'Butter','Creamy dairy butter made from fresh cream.',NULL,1,1,1002),(3,'Cream','Versatile cooking cream ideal for sauces, soups, and desserts.',NULL,1,1,1003),(4,'Yogurt','Creamy yogurt with a mild, fresh taste and smooth texture.',NULL,1,1,1004),(5,'Taco sauce','Classic taco sauce perfect for tacos, wraps, and nachos.',NULL,2,1,2001),(6,'Taco spice','Dry taco seasoning mix for easy and tasty taco meals.',NULL,2,1,2002),(7,'Tortilla','Soft wheat tortillas perfect for wraps and tacos.',NULL,2,1,2003),(8,'Nacho cheese dip','Smooth nacho cheese dip perfect for chips and snacks.',NULL,2,1,2004),(9,'Chips','Crispy potato chips with a classic salty taste.',NULL,3,1,3001),(10,'Popcorn','Freshly popped popcorn with a light, crunchy texture.',NULL,3,1,3002),(11,'Nuts','Crunchy mixed nuts, perfect for snacking.',NULL,3,1,3003),(12,'Cheese balls','Crunchy cheese balls with a rich cheesy flavor.',NULL,3,1,3004);
+INSERT INTO iot_store.Product (product_id,product_name,product_description,product_image,aisle_id,floor,product_location) VALUES
+	 (1,'Milk','Fresh dairy milk, rich in calcium and perfect for everyday use.','https://purepng.com/public/uploads/large/purepng.com-milkmilkliquidnutritioncow-1411527957210irmnt.png',1,1,1001),
+	 (2,'Butter','Creamy dairy butter made from fresh cream.','https://purepng.com/public/uploads/large/purepng.com-butterfood-dairy-milk-butter-buttermilk-cream-butterfat-941524621398zsmge.png',1,1,1002),
+	 (3,'Cream','Versatile cooking cream ideal for sauces, soups, and desserts.','https://img.freepik.com/premium-psd/tasty-bechamel-sauce-png-isolated-transparent-background_191095-9882.jpg?w=740',1,1,1003),
+	 (4,'Yogurt','Creamy yogurt with a mild, fresh taste and smooth texture.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRdRNzy-zgBWcIvdVOa4U2ziusf5aack4t9Q&s',1,1,1004),
+	 (5,'Taco sauce','Classic taco sauce perfect for tacos, wraps, and nachos.','https://www.santamariaworld.com/optimized/product-large/globalassets/_products/tex-mex/200209.png',2,1,2001),
+	 (6,'Taco spice','Dry taco seasoning mix for easy and tasty taco meals.','https://www.santamariaworld.com/optimized/product-large/globalassets/_products/tex-mex/3101.png',2,1,2002),
+	 (7,'Tortilla','Soft wheat tortillas perfect for wraps and tacos.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZmKW_IEYngjMVzwgm2ctYHhjg-ZbLsDgVA&s',2,1,2003),
+	 (8,'Nacho cheese dip','Smooth nacho cheese dip perfect for chips and snacks.','https://foodora.dhmedia.io/image/darsktores-se/7311310038397.png?height=480',2,1,2004),
+	 (9,'Chips','Crispy potato chips with a classic salty taste.','https://purepng.com/public/uploads/large/purepng.com-potato-chipsfood-potato-chips-snack-taste-fat-eat-fried-crunchy-941524598595iiwci.png',3,1,3001),
+	 (10,'Popcorn','Freshly popped popcorn with a light, crunchy texture.','https://purepng.com/public/uploads/large/purepng.com-popcornfood-box-corn-bucket-popcorn-movie-film-cinema-941524633493b9owo.png',3,1,3002);
+INSERT INTO iot_store.Product (product_id,product_name,product_description,product_image,aisle_id,floor,product_location) VALUES
+	 (11,'Nuts','Crunchy mixed nuts, perfect for snacking.','https://purepng.com/public/uploads/large/purepng.com-nutsfood-nut-snack-fruit-94152459932475hje.png',3,1,3003),
+	 (12,'Cheese balls','Crunchy cheese balls with a rich cheesy flavor.','https://mmmithaiwala.in/wp-content/uploads/2023/10/cheeseballs.jpg',3,1,3004);
+
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 

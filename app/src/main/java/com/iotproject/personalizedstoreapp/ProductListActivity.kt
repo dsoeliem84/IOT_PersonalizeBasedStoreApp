@@ -54,9 +54,9 @@ class ProductListActivity : AppCompatActivity() {
 
                 if (products.isEmpty()) {
                     tvError.text = if (mode == "promo") {
-                        "No promotions available in this aisle"
+                        "No promotion available in this aisle"
                     } else {
-                        "No products found in this aisle"
+                        "No product found in this aisle"
                     }
                     tvError.visibility = View.VISIBLE
                     rvProducts.visibility = View.GONE
