@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, request
+from flask_caching import Cache
+
 import mysql.connector
 
 app = Flask(__name__)
@@ -11,7 +13,16 @@ DB_CONFIGURE = {
     "port" : 3306
 }
 
+app.config["CACHE_TYPE"] = "SimpleCache"
+app.config["CACHE_DEFAULT_TIMEOUT"] = 300  # set caching for 5 minutes
+
+cache = Cache(app)
+
 @app.get("/api/products")
+@cache.cached(
+    timeout=300,
+    query_string=True   # IMPORTANT: includes floor, aisle_id, mode
+)
 def products():
     floor = request.args.get("floor", type=int)
     aisle_id = request.args.get("aisle_id", type=int)
