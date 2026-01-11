@@ -1,4 +1,4 @@
-🛒 Personalized Store Application (IoT)
+# Personalized Store Application (IoT)
 A modern Android application designed to enhance the retail experience through proximity awareness. The app utilizes Bluetooth Low Energy (BLE) to detect iBeacons, automatically serving personalized product lists and promotional offers based on the user's precise location within a physical store.
 
 ✨ Features
@@ -41,6 +41,11 @@ Database: Import iot_store.sql into your MySQL instance.
 
 Bash
 mysql -u root -p < iot_store.sql
+
+or if you run the MySQL under Docker
+
+docker exec -i mysql-db mysql -u root -plocalpassword test_iot < iot_store.sql     
+
 API: Install dependencies and run the Flask server.
 
 Bash
